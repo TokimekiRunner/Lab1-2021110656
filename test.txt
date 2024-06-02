@@ -1,0 +1,13 @@
+I have a pen
+I have an apple
+Apple pen
+I have a dog
+Dog has a pen
+Apple has a dog
+Dog eats an apple
+I eat a dog
+I eat an apple
+Apple eat an apple
+I am an apple
+Dog is an apple
+I have an apple pen

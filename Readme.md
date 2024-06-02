@@ -4,3 +4,5 @@
 idea 配置junit即可运行src中CGraphTest中测试   
 res文件夹存放图片和中间`.dot`文件，test中存放`test`源文件和中间文件     
 根目录下的一些`txt`文件是实验指导中的案例
+
+hello

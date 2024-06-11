@@ -1,33 +1,15 @@
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.io.*;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Main.
- *
- * @author TOKEMEKI Runner
- */
-
-public class Main {
+import static org.junit.jupiter.api.Assertions.*;
+class CgraphTest {
   private static String fileName = "test.txt";
   //    private static String fileName = "test.txt";
   private static String resultsFileName = "testResults.txt";
-
-  //    private static String resultsFileName = "testResults.txt";
-  public static void main(String[] args) { //主函数入口
-    readFile();
-    Cgraph graph = readWordsToGraph();
-    testFunc6And2Generate(graph);
-
-    //          TestFunc3_brige(graph);
-    // TestFunc4_generate(graph);
-    testFunc5Path(graph);
-
-  }
-
-
   public static void readFile() {
     File file = new File(fileName);
     BufferedReader reader = null;
@@ -98,66 +80,38 @@ public class Main {
     //         graph.selfprintmatrix();//打印邻接矩阵
     return graph;
   }
-
-  static void testFunc3Brige(Cgraph graph) {
-    //   ReadFile();
-    //    CGraph graph = readWordsToGraph();
-    Scanner scanner = new Scanner(System.in);
-    while (true) {
-      System.out.println("please input two word or (0,0) to exit:");
-      String word1 = scanner.next();
-      String word2 = scanner.next();
-      if (word1.equals("0") && word2.equals("0")) {
-        break;
-      }
-      String res = graph.queryBridgeWords(word1, word2);
-      System.out.print(res);
-    }
-    scanner.close();
-    return;
+  @Test
+  void calcShortestPath1() {
+    readFile();
+    Cgraph graph = readWordsToGraph();
+    String res= graph.calcShortestPath("","");
+    System.out.println(res);
+    org.junit.jupiter.api.Assertions.assertEquals(res," cannot get to ");
+    System.out.println("PASS");
   }
-
-  static void testFunc4Generate(Cgraph graph) {
-    //     ReadFile();
-    //    CGraph graph = readWordsToGraph();
-    Scanner scanner = new Scanner(System.in);
-    while (true) {
-      System.out.println("please input your text or -1 to exit:");
-      String inputText = "";
-      inputText = scanner.nextLine();
-      if (inputText.equals("-1")) {
-        break;
-      }
-      String res = graph.generateNewText(inputText);
-      System.out.print(res + "\n");
-
-    }
-    scanner.close();
+  @Test
+  void calcShortestPath2() {
+    readFile();
+    Cgraph graph = readWordsToGraph();
+    String res= graph.calcShortestPath("i","NW");
+    System.out.println(res);
   }
-
-  static void testFunc5Path(Cgraph graph) {
-    //   ReadFile();
-    //    CGraph graph = readWordsToGraph();
-    Scanner scanner = new Scanner(System.in);
-    while (true) {
-      System.out.println("please input two word or (0,0) to exit(NW:not a word):");
-      String word1 = scanner.next();
-      String word2 = scanner.next();
-      if (word1.equals("0") && word2.equals("0")) {
-        break;
-      }
-      String res = graph.calcShortestPath(word1, word2);
-      System.out.print(res);
-    }
-    scanner.close();
-    return;
+  @Test
+  void calcShortestPath3() {
+    readFile();
+    Cgraph graph = readWordsToGraph();
+    String res= graph.calcShortestPath("i","an");
+    System.out.println(res);
+    org.junit.jupiter.api.Assertions.assertEquals(res,"i->am->an[length:2]\n");
+    System.out.println("PASS");
   }
-
-  static void testFunc6And2Generate(Cgraph graph) {
-    //   ReadFile();
-    //  CGraph graph = readWordsToGraph();
-    graph.randomwalk();
-    graph.showDirectedGraph(graph.matrix);
+  @Test
+  void calcShortestPath4() {
+    readFile();
+    Cgraph graph = readWordsToGraph();
+    String res= graph.calcShortestPath("hit","man");
+    System.out.println(res);
+    org.junit.jupiter.api.Assertions.assertEquals(res,"hit cannot get to man");
+    System.out.println("PASS");
   }
-
 }
